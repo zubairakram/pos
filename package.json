@@ -1,0 +1,28 @@
+{
+  "name": "ledger-pos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ledger POS — a point of sale with a full double-entry accounting backend",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm run start -w server",
+    "db:migrate": "npm run migrate -w server",
+    "db:seed": "npm run seed -w server",
+    "db:demo": "npm run demo -w server",
+    "db:reset": "npm run reset -w server",
+    "db:local": "bash scripts/local-db.sh",
+    "db:setup": "bash scripts/setup-db.sh",
+    "test:api": "npm run test:api -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -39,12 +39,13 @@ This creates an isolated cluster in `./.pgdata` on port `5433` with user `pos` /
 
 ```bash
 npm install
-npm run db:local
 cp server/.env.example server/.env
 npm run db:reset      # apply schema and seed base data (users, accounts, products, etc.)
 npm run db:demo       # add 30 days of realistic trading history (optional but great for demos)
-npm run dev           # API at http://localhost:4000, app at http://localhost:5173
+npm run dev           # starts the local cluster, API (4000) and Vite (5173)
 ```
+
+`npm run dev` and `npm start` start the local cluster automatically if it is not already running, so after a reboot you only need `npm run dev`. The cluster is owned by your user and trusts loopback connections: **no sudo and no password prompt**. Use `npm run db:stop` / `npm run db:status` to manage it manually.
 
 ### Option 2: use an existing PostgreSQL server
 
@@ -78,10 +79,12 @@ The demo seed also opens a cash drawer for the cashier (`Counter 1` at the Main 
 
 | Script | Description |
 | --- | --- |
-| `npm run dev` | Run API (watch) and Vite dev server concurrently |
+| `npm run dev` | Start the local DB (if needed), API (watch) and Vite dev server |
 | `npm run build` | Build the frontend for production (`client/`) |
-| `npm run start` | Start the API in production mode (`server/`) |
-| `npm run db:local` | Create/start a local Postgres cluster on `5433` |
+| `npm run start` | Start the local DB (if needed) and the API in production mode |
+| `npm run db:local` | Create/start the local Postgres cluster on `5433` |
+| `npm run db:stop` | Stop the local Postgres cluster |
+| `npm run db:status` | Show whether the local cluster is running |
 | `npm run db:migrate` | Apply pending migrations (idempotent) |
 | `npm run db:seed` | Seed base data (safe to re-run only if empty; use `--force` not required) |
 | `npm run db:demo` | Add 30 days of trading history (refuses if sales already exist) |

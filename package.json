@@ -8,14 +8,18 @@
     "client"
   ],
   "scripts": {
+    "predev": "npm run db:local",
     "dev": "concurrently -n api,web -c blue,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
     "build": "npm run build -w client",
+    "prestart": "npm run db:local",
     "start": "npm run start -w server",
     "db:migrate": "npm run migrate -w server",
     "db:seed": "npm run seed -w server",
     "db:demo": "npm run demo -w server",
     "db:reset": "npm run reset -w server",
     "db:local": "bash scripts/local-db.sh",
+    "db:stop": "bash scripts/local-db.sh stop",
+    "db:status": "bash scripts/local-db.sh status",
     "db:setup": "bash scripts/setup-db.sh",
     "test:api": "npm run test:api -w server"
   },
